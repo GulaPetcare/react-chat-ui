@@ -8,7 +8,7 @@ import DefaultChatBubble from "../ChatBubble";
 import ChatInput from "../ChatInput";
 import Message from "../Message";
 import styled, { ThemeProvider } from "styled-components";
-import merge from "lodash.merge";
+import merge from "deepmerge";
 
 interface Theme {
   bubbles: {
