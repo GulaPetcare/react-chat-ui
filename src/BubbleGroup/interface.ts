@@ -1,7 +1,10 @@
-import { Message, ChatBubble } from '../';
+import { Message, ChatBubble } from "../";
 export default interface BubbleGroupInterface {
-  messages: [Message];
-  id: number;
-  showSenderName: boolean;
-  chatBubble: ChatBubble;
-};
+  messages: Array<Message>;
+  id: string | number;
+  showSenderName?: boolean;
+  chatBubble: typeof ChatBubble;
+  bubblesCentered?: boolean;
+  bubbleStyles: any;
+  senderName?: string;
+}

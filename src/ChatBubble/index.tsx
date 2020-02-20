@@ -1,57 +1,49 @@
-import * as React from 'react';
-import ChatBubbleProps from './interface';
-import styles from './styles';
+import * as React from "react";
+import ChatBubbleProps, { ChatBubbleStyles } from "./interface";
+import styles from "./styles";
 
 const defaultBubbleStyles = {
   userBubble: {},
   chatbubble: {},
-  text: {},
+  text: {}
 };
 
-export default class ChatBubble extends React.Component {
-  props;
+export { ChatBubbleProps, ChatBubbleStyles };
 
-  constructor(props: ChatBubbleProps) {
-    super(props);
-  }
+export default function ChatBubble(props: ChatBubbleProps) {
+  const { bubblesCentered } = props;
+  let { bubbleStyles } = props;
+  bubbleStyles = bubbleStyles || defaultBubbleStyles;
+  const { userBubble, chatbubble, text } = bubbleStyles;
 
-  public render() {
-    const { bubblesCentered } = this.props;
-    let { bubbleStyles } = this.props;
-    bubbleStyles = bubbleStyles || defaultBubbleStyles;
-    const { userBubble, chatbubble, text } = bubbleStyles;
+  // message.id 0 is reserved for blue
+  const chatBubbleStyles =
+    props.message.id === 0
+      ? {
+          ...styles.chatbubble,
+          ...(bubblesCentered ? {} : styles.chatbubbleOrientationNormal),
+          ...chatbubble,
+          ...userBubble
+        }
+      : {
+          ...styles.chatbubble,
+          ...styles.recipientChatbubble,
+          ...(bubblesCentered
+            ? {}
+            : styles.recipientChatbubbleOrientationNormal),
+          ...chatbubble,
+          ...userBubble
+        };
 
-    // message.id 0 is reserved for blue
-    const chatBubbleStyles =
-      this.props.message.id === 0
-        ? {
-            ...styles.chatbubble,
-            ...bubblesCentered ? {} : styles.chatbubbleOrientationNormal,
-            ...chatbubble,
-            ...userBubble,
-          }
-        : {
-            ...styles.chatbubble,
-            ...styles.recipientChatbubble,
-            ...bubblesCentered
-              ? {}
-              : styles.recipientChatbubbleOrientationNormal,
-            ...chatbubble,
-            ...userBubble,
-          };
-
-    return (
-      <div
-        style={{
-          ...styles.chatbubbleWrapper,
-        }}
-      >
-        <div style={chatBubbleStyles}>
-          <p style={{ ...styles.p, ...text }}>{this.props.message.message}</p>
-        </div>
+  return (
+    <div
+      style={{
+        ...styles.chatbubbleWrapper
+      }}
+    >
+      <div style={chatBubbleStyles}>
+        <p style={{ ...styles.p, ...text }}>{props.message.message}</p>
       </div>
-    );
-  }
+    </div>
+  );
 }
-
-export { ChatBubbleProps };

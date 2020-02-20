@@ -1,10 +1,12 @@
-import Message from '../Message';
+import Message from "../Message";
+import { CSSProperties } from "react";
+export interface ChatBubbleStyles {
+  userBubble?: CSSProperties;
+  chatbubble?: CSSProperties;
+  text?: CSSProperties;
+}
 export default interface ChatBubbleProps {
-  message: Message
-  bubbleStyles: {
-    userBubble: object
-    chatbubble: object
-    text: object
-  }
-  bubblesCentered: boolean
+  message: Message;
+  bubbleStyles?: ChatBubbleStyles;
+  bubblesCentered?: boolean;
 }
