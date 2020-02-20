@@ -1,6 +1,11 @@
 import * as React from "react";
 import ChatBubbleProps, { ChatBubbleStyles } from "./interface";
 import styles from "./styles";
+import styled from "styled-components";
+
+const ChatBubbleWrapper = styled.div`
+  overflow: auto;
+`;
 
 const defaultBubbleStyles = {
   userBubble: {},
@@ -36,14 +41,10 @@ export default function ChatBubble(props: ChatBubbleProps) {
         };
 
   return (
-    <div
-      style={{
-        ...styles.chatbubbleWrapper
-      }}
-    >
+    <ChatBubbleWrapper>
       <div style={chatBubbleStyles}>
         <p style={{ ...styles.p, ...text }}>{props.message.message}</p>
       </div>
-    </div>
+    </ChatBubbleWrapper>
   );
 }

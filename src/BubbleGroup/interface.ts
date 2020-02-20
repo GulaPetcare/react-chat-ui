@@ -3,8 +3,8 @@ export default interface BubbleGroupInterface {
   messages: Array<Message>;
   id: string | number;
   showSenderName?: boolean;
-  chatBubble: typeof ChatBubble;
+  chatBubble?: typeof ChatBubble;
   bubblesCentered?: boolean;
-  bubbleStyles: any;
+  bubbleStyles?: any;
   senderName?: string;
 }
