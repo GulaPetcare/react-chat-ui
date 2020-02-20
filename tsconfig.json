@@ -10,7 +10,9 @@
     "jsx": "react",
     "sourceMap": true,
     "allowJs": true,
-    "types": ["react", "react-dom", "styled-components", "lodash.merge"]
+    "noEmit": true,
+    "types": ["react", "react-dom", "styled-components", "lodash.merge"],
+    "declaration": true
   },
   "typeRoots": ["node_modules/@types", "./typings.d.ts"],
   "include": ["src/**/*"],
