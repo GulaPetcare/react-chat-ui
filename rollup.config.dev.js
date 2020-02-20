@@ -7,7 +7,7 @@ import livereload from "rollup-plugin-livereload";
 import serve from "rollup-plugin-serve";
 
 export default {
-  input: "demo/index.tsx",
+  input: "./src/demo.tsx",
   output: {
     file: "demo/bundle.js",
     format: "iife"
@@ -16,8 +16,8 @@ export default {
     replace({
       "process.env.NODE_ENV": JSON.stringify("dev")
     }),
-    livereload("demo", "src"),
-    serve("demo", "src"),
+    livereload("demo"),
+    serve("demo"),
     svgr({
       icon: true
     }),

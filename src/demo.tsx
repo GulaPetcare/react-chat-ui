@@ -1,6 +1,6 @@
 import * as React from "react";
 import { render } from "react-dom";
-import { ChatFeed, ChatBubble, BubbleGroup, Message } from "../src";
+import { ChatFeed, ChatBubble, BubbleGroup, Message } from "./index";
 
 const styles = {
   button: {
@@ -44,16 +44,22 @@ interface State {
   messages: Array<Message>;
   useCustomBubble: boolean;
 }
-class Chat extends React.Component<any, State> {
+class Chat extends React.Component<{}, State> {
   message = React.createRef<HTMLInputElement>();
 
   constructor(props: any) {
     super(props);
     this.state = {
       messages: [
-        new Message({ id: "Mark", message: "Hey guys!", senderName: "Mark" }),
         new Message({
-          id: 2,
+          fromMe: false,
+          senderId: "mark",
+          message: "Hey guys!",
+          senderName: "Mark"
+        }),
+        new Message({
+          fromMe: false,
+          senderId: "evan",
           message: "Hey! Evan here. react-chat-ui is pretty dooope.",
           senderName: "Evan"
         })
@@ -63,7 +69,7 @@ class Chat extends React.Component<any, State> {
     };
   }
 
-  onPress(user: "you" | "mark" | "evan") {
+  onPress(user: State["curr_user"]) {
     this.setState({ curr_user: user });
   }
 
@@ -81,12 +87,15 @@ class Chat extends React.Component<any, State> {
   pushMessage(recipient: "you" | "mark" | "evan", message: any) {
     const prevState = this.state;
     const newMessage = new Message({
-      id: recipient,
+      fromMe: this.state.curr_user === "you",
+      senderId: recipient,
       message,
       senderName: users[recipient] as string
     });
-    prevState.messages.push(newMessage);
-    this.setState(this.state);
+
+    this.setState({
+      messages: prevState.messages.concat(newMessage)
+    });
   }
 
   render() {
@@ -167,19 +176,36 @@ class Chat extends React.Component<any, State> {
         </div>
         <h2 className="text-center">There are Bubbles!</h2>
         <ChatBubble
-          message={new Message({ id: 1, message: "I float to the left!" })}
+          message={
+            new Message({
+              senderId: "mark",
+              message: "I float to the left!",
+              fromMe: false
+            })
+          }
         />
         <ChatBubble
-          message={new Message({ id: 0, message: "I float to the right!" })}
+          message={
+            new Message({
+              senderId: "evan",
+              message: "I float to the right!",
+              fromMe: true
+            })
+          }
         />
 
         <h2 className="text-center">And we have Bubble Groups!</h2>
         <BubbleGroup
           messages={[
-            new Message({ id: 1, message: "Hey!" }),
-            new Message({ id: 1, message: "I forgot to mention..." }),
+            new Message({ fromMe: false, senderId: "1", message: "Hey!" }),
             new Message({
-              id: 1,
+              fromMe: false,
+              senderId: "1",
+              message: "I forgot to mention..."
+            }),
+            new Message({
+              fromMe: false,
+              senderId: "1",
               message:
                 "Oh no, I forgot... I think I was going to say I'm a BubbleGroup"
             })
@@ -189,13 +215,24 @@ class Chat extends React.Component<any, State> {
           senderName={"Elon Musk"}
         />
         <ChatBubble
-          message={new Message({ id: 2, message: "I 'm a single ChatBubble!" })}
+          message={
+            new Message({
+              fromMe: false,
+              senderId: "2",
+              message: "I 'm a single ChatBubble!"
+            })
+          }
         />
         <BubbleGroup
           messages={[
-            new Message({ id: 0, message: "How could you forget already?!" }),
             new Message({
-              id: 0,
+              fromMe: true,
+              senderId: "0",
+              message: "How could you forget already?!"
+            }),
+            new Message({
+              fromMe: true,
+              senderId: "0",
               message: "Oh well. I'm a BubbleGroup as well"
             })
           ]}

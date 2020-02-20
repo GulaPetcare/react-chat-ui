@@ -1,41 +1,38 @@
 import * as React from "react";
 import BubbleGroupInterface from "./interface";
 import DefaultChatBubble from "../ChatBubble";
-import styles from "./styles";
+import styled from "styled-components";
+
+const BubbleGroupContainer = styled.div`
+  margin: 10px 0;
+  overflow: auto;
+  position: relative;
+`;
+
+const BubbleGroupHeader = styled.h5`
+  margin: 0;
+  font-size: 14px;
+  font-weight: bold;
+  color: #999;
+`;
 
 export default function BubbleGroup(props: BubbleGroupInterface) {
-  const {
-    bubblesCentered,
-    bubbleStyles,
-    showSenderName,
-    chatBubble,
-    senderName,
-    messages
-  } = props;
+  const { showSenderName, chatBubble, senderName, messages } = props;
   const ChatBubble = chatBubble || DefaultChatBubble;
   const sampleMessage = messages[0];
 
-  const messageNodes = messages.map((message, i) => {
-    return (
-      <ChatBubble
-        key={i}
-        message={message}
-        bubblesCentered={bubblesCentered}
-        bubbleStyles={bubbleStyles}
-      />
-    );
-  });
-
   return (
-    <div style={styles.chatbubbleWrapper}>
+    <BubbleGroupContainer>
       {showSenderName &&
         (senderName || sampleMessage.senderName) !== "" &&
-        sampleMessage.id !== 0 && (
-          <h5 style={styles.bubbleGroupHeader}>
+        sampleMessage.fromMe === false && (
+          <BubbleGroupHeader>
             {senderName || sampleMessage.senderName}
-          </h5>
+          </BubbleGroupHeader>
         )}
-      {messageNodes}
-    </div>
+      {messages.map((message, i) => (
+        <ChatBubble key={i} message={message} />
+      ))}
+    </BubbleGroupContainer>
   );
 }

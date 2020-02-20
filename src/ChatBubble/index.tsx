@@ -1,50 +1,38 @@
 import * as React from "react";
-import ChatBubbleProps, { ChatBubbleStyles } from "./interface";
-import styles from "./styles";
 import styled from "styled-components";
+import Message from "../Message";
 
 const ChatBubbleWrapper = styled.div`
   overflow: auto;
 `;
 
-const defaultBubbleStyles = {
-  userBubble: {},
-  chatbubble: {},
-  text: {}
-};
+const ChatBubbleUI = styled.div<{ me: boolean }>`
+  background-color: ${props => (props.me ? "#0084ff" : "#ccc")};
+  border-radius: 20px;
+  margin: 1px auto;
+  max-width: 425px;
+  padding: 8px 14px;
+  width: -webkit-fit-content;
+  float: ${props => (props.me ? "right" : "left")};
+`;
 
-export { ChatBubbleProps, ChatBubbleStyles };
+const MessageUI = styled.p`
+  color: #fff;
+  font-size: 16p;
+  xfont-weight: normal;
+  margin: 0;
+`;
+
+export interface ChatBubbleProps {
+  message: Message;
+}
 
 export default function ChatBubble(props: ChatBubbleProps) {
-  const { bubblesCentered } = props;
-  let { bubbleStyles } = props;
-  bubbleStyles = bubbleStyles || defaultBubbleStyles;
-  const { userBubble, chatbubble, text } = bubbleStyles;
-
-  // message.id 0 is reserved for blue
-  const chatBubbleStyles =
-    props.message.id === 0
-      ? {
-          ...styles.chatbubble,
-          ...(bubblesCentered ? {} : styles.chatbubbleOrientationNormal),
-          ...chatbubble,
-          ...userBubble
-        }
-      : {
-          ...styles.chatbubble,
-          ...styles.recipientChatbubble,
-          ...(bubblesCentered
-            ? {}
-            : styles.recipientChatbubbleOrientationNormal),
-          ...chatbubble,
-          ...userBubble
-        };
-
   return (
     <ChatBubbleWrapper>
-      <div style={chatBubbleStyles}>
-        <p style={{ ...styles.p, ...text }}>{props.message.message}</p>
-      </div>
+      <ChatBubbleUI me={props.message.fromMe}>
+        <MessageUI>{props.message.message}</MessageUI>
+      </ChatBubbleUI>
     </ChatBubbleWrapper>
   );
 }

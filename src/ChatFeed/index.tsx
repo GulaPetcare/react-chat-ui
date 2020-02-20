@@ -4,15 +4,34 @@
 
 import * as React from "react";
 import BubbleGroup from "../BubbleGroup";
-import DefaultChatBubble, { ChatBubbleStyles } from "../ChatBubble";
+import DefaultChatBubble from "../ChatBubble";
 import ChatInput from "../ChatInput";
 import Message from "../Message";
-import styles from "./styles";
+import styled from "styled-components";
+
+const ChatPanel = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+`;
+
+const ChatHistory = styled.div<{ maxHeight?: number }>`
+  overflow: auto;
+  height: ${props =>
+    props.maxHeight != null ? props.maxHeight + "px" : "auto"};
+  max-height: ${props =>
+    props.maxHeight != null ? props.maxHeight + "px" : "auto"};
+`;
+
+const TypingIndicator = styled.div`
+  margin: 10px 0;
+  overflow: auto;
+  position: relative;
+`;
 
 // Model for ChatFeed props.
 interface ChatFeedInterface {
-  bubblesCentered?: boolean;
-  bubbleStyles?: ChatBubbleStyles;
   hasInputField?: boolean;
   isTyping?: boolean;
   maxHeight?: number;
@@ -22,7 +41,14 @@ interface ChatFeedInterface {
 }
 
 // React component to render a complete chat feed
-export default function ChatFeed(props: ChatFeedInterface) {
+export default function ChatFeed({
+  messages,
+  maxHeight,
+  isTyping,
+  chatBubble,
+  showSenderName,
+  hasInputField
+}: ChatFeedInterface) {
   const chat = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
@@ -30,18 +56,9 @@ export default function ChatFeed(props: ChatFeedInterface) {
     const height = chat.current!.clientHeight;
     const maxScrollTop = scrollHeight - height;
     chat.current!.scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
-  }, []);
+  }, [messages]);
 
-  const inputField = props.hasInputField && <ChatInput />;
-  const { maxHeight } = props;
-
-  const {
-    messages,
-    isTyping,
-    bubbleStyles,
-    chatBubble,
-    showSenderName
-  } = props;
+  const inputField = hasInputField && <ChatInput />;
 
   const ChatBubble = chatBubble || DefaultChatBubble;
 
@@ -52,7 +69,7 @@ export default function ChatFeed(props: ChatFeedInterface) {
     // Find diff in message type or no more messages
     if (
       index === messages.length - 1 ||
-      messages[index + 1].id !== message.id
+      messages[index + 1].senderId !== message.senderId
     ) {
       const messageGroup: Array<Message> = group;
       group = [];
@@ -60,10 +77,9 @@ export default function ChatFeed(props: ChatFeedInterface) {
         <BubbleGroup
           key={index}
           messages={messageGroup}
-          id={message.id}
+          id={message.senderId}
           showSenderName={showSenderName}
           chatBubble={ChatBubble}
-          bubbleStyles={bubbleStyles}
         />
       );
     }
@@ -74,30 +90,27 @@ export default function ChatFeed(props: ChatFeedInterface) {
   // Other end is typing...
   if (isTyping) {
     messageNodes.push(
-      <div key="isTyping" style={{ ...styles.chatbubbleWrapper }}>
+      <TypingIndicator key="is-typing">
         <ChatBubble
-          message={new Message({ id: 1, message: "...", senderName: "" })}
-          bubbleStyles={bubbleStyles}
+          message={
+            new Message({
+              fromMe: false,
+              senderId: "1",
+              message: "...",
+              senderName: ""
+            })
+          }
         />
-      </div>
+      </TypingIndicator>
     );
   }
 
   return (
-    <div id="chat-panel" style={styles.chatPanel}>
-      <div
-        ref={chat}
-        className="chat-history"
-        style={{ ...styles.chatHistory, maxHeight }}
-      >
-        <div className="chat-messages">{messageNodes}</div>
-      </div>
+    <ChatPanel>
+      <ChatHistory ref={chat} maxHeight={maxHeight}>
+        <div>{messageNodes}</div>
+      </ChatHistory>
       {inputField}
-    </div>
+    </ChatPanel>
   );
 }
-
-/**
- * Determines what type of message/messages to render.
- */
-const renderMessages = (messages: [Message]) => {};
