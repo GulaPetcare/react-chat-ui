@@ -4,14 +4,15 @@
     "target": "es5",
     "module": "esnext",
     "strict": true,
+    "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
     "lib": ["dom", "esnext"],
     "jsx": "react",
     "sourceMap": true,
     "allowJs": true,
-    "types": ["react", "react-dom", "styled-components"]
+    "types": ["react", "react-dom", "styled-components", "lodash.merge"]
   },
-  "typeRoots": ["node_modules/@types"],
+  "typeRoots": ["node_modules/@types", "./typings.d.ts"],
   "include": ["src/**/*"],
   "exclude": ["node_modules"]
 }

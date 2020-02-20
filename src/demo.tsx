@@ -1,6 +1,14 @@
 import * as React from "react";
 import { render } from "react-dom";
 import { ChatFeed, ChatBubble, BubbleGroup, Message } from "./index";
+import { ThemeProvider, createGlobalStyle } from "styled-components";
+
+const GlobalStyles = createGlobalStyle`
+  body {
+    font-family: system-ui;
+    color: #010101;
+  }
+`;
 
 const styles = {
   button: {
@@ -101,6 +109,7 @@ class Chat extends React.Component<{}, State> {
   render() {
     return (
       <div className="container">
+        <GlobalStyles />
         <h1 className="text-center">react-chat-ui</h1>
         <p className="text-center">
           <a
@@ -159,7 +168,11 @@ class Chat extends React.Component<{}, State> {
             </button>
           </div>
           <div
-            style={{ display: "flex", justifyContent: "center", marginTop: 10 }}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: 10
+            }}
           >
             <button
               style={{
@@ -167,7 +180,9 @@ class Chat extends React.Component<{}, State> {
                 ...(this.state.useCustomBubble ? styles.selected : {})
               }}
               onClick={() =>
-                this.setState({ useCustomBubble: !this.state.useCustomBubble })
+                this.setState({
+                  useCustomBubble: !this.state.useCustomBubble
+                })
               }
             >
               Custom Bubbles
@@ -175,71 +190,77 @@ class Chat extends React.Component<{}, State> {
           </div>
         </div>
         <h2 className="text-center">There are Bubbles!</h2>
-        <ChatBubble
-          message={
-            new Message({
-              senderId: "mark",
-              message: "I float to the left!",
-              fromMe: false
-            })
-          }
-        />
-        <ChatBubble
-          message={
-            new Message({
-              senderId: "evan",
-              message: "I float to the right!",
-              fromMe: true
-            })
-          }
-        />
+        <ThemeProvider
+          theme={{
+            bubbles: { mineBackground: "red", theirBackground: "blue" }
+          }}
+        >
+          <ChatBubble
+            message={
+              new Message({
+                senderId: "mark",
+                message: "I float to the left!",
+                fromMe: false
+              })
+            }
+          />
+          <ChatBubble
+            message={
+              new Message({
+                senderId: "evan",
+                message: "I float to the right!",
+                fromMe: true
+              })
+            }
+          />
 
-        <h2 className="text-center">And we have Bubble Groups!</h2>
-        <BubbleGroup
-          messages={[
-            new Message({ fromMe: false, senderId: "1", message: "Hey!" }),
-            new Message({
-              fromMe: false,
-              senderId: "1",
-              message: "I forgot to mention..."
-            }),
-            new Message({
-              fromMe: false,
-              senderId: "1",
-              message:
-                "Oh no, I forgot... I think I was going to say I'm a BubbleGroup"
-            })
-          ]}
-          id={1}
-          showSenderName={true}
-          senderName={"Elon Musk"}
-        />
-        <ChatBubble
-          message={
-            new Message({
-              fromMe: false,
-              senderId: "2",
-              message: "I 'm a single ChatBubble!"
-            })
-          }
-        />
-        <BubbleGroup
-          messages={[
-            new Message({
-              fromMe: true,
-              senderId: "0",
-              message: "How could you forget already?!"
-            }),
-            new Message({
-              fromMe: true,
-              senderId: "0",
-              message: "Oh well. I'm a BubbleGroup as well"
-            })
-          ]}
-          id={1}
-          showSenderName={true}
-          senderName={"Elon Musk"}
-        />
+          <h2 className="text-center">And we have Bubble Groups!</h2>
+          <BubbleGroup
+            messages={[
+              new Message({ fromMe: false, senderId: "1", message: "Hey!" }),
+              new Message({
+                fromMe: false,
+                senderId: "1",
+                message: "I forgot to mention..."
+              }),
+              new Message({
+                fromMe: false,
+                senderId: "1",
+                message:
+                  "Oh no, I forgot... I think I was going to say I'm a BubbleGroup"
+              })
+            ]}
+            id={1}
+            showSenderName={true}
+            senderName={"Elon Musk"}
+          />
+          <ChatBubble
+            message={
+              new Message({
+                fromMe: false,
+                senderId: "2",
+                message: "I 'm a single ChatBubble!"
+              })
+            }
+          />
+          <BubbleGroup
+            messages={[
+              new Message({
+                fromMe: true,
+                senderId: "0",
+                message: "How could you forget already?!"
+              }),
+              new Message({
+                fromMe: true,
+                senderId: "0",
+                message: "Oh well. I'm a BubbleGroup as well"
+              })
+            ]}
+            id={1}
+            showSenderName={true}
+            senderName={"Elon Musk"}
+          />
+        </ThemeProvider>
       </div>
     );
   }

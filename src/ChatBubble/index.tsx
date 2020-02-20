@@ -7,7 +7,10 @@ const ChatBubbleWrapper = styled.div`
 `;
 
 const ChatBubbleUI = styled.div<{ me: boolean }>`
-  background-color: ${props => (props.me ? "#0084ff" : "#ccc")};
+  background-color: ${props =>
+    props.me
+      ? props.theme.bubbles.mineBackground
+      : props.theme.bubbles.theirBackground};
   border-radius: 20px;
   margin: 1px auto;
   max-width: 425px;
@@ -16,10 +19,12 @@ const ChatBubbleUI = styled.div<{ me: boolean }>`
   float: ${props => (props.me ? "right" : "left")};
 `;
 
-const MessageUI = styled.p`
-  color: #fff;
-  font-size: 16p;
-  xfont-weight: normal;
+const MessageUI = styled.p<{ me: boolean }>`
+  color: ${props =>
+    props.me ? props.theme.bubbles.mineColor : props.theme.bubbles.theirColor};
+  font-size: ${props => props.theme.bubbles.messageFontSize};
+  font-family: ${props => props.theme.bubbles.messageFontFamily};
+  font-weight: normal;
   margin: 0;
 `;
 
@@ -31,7 +36,7 @@ export default function ChatBubble(props: ChatBubbleProps) {
   return (
     <ChatBubbleWrapper>
       <ChatBubbleUI me={props.message.fromMe}>
-        <MessageUI>{props.message.message}</MessageUI>
+        <MessageUI me={props.message.fromMe}>{props.message.message}</MessageUI>
       </ChatBubbleUI>
     </ChatBubbleWrapper>
   );

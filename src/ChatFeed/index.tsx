@@ -7,7 +7,35 @@ import BubbleGroup from "../BubbleGroup";
 import DefaultChatBubble from "../ChatBubble";
 import ChatInput from "../ChatInput";
 import Message from "../Message";
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
+import merge from "lodash.merge";
+
+interface Theme {
+  bubbles: {
+    mineBackground: string;
+    mineColor: string;
+    theirColor: string;
+    theirBackground: string;
+    messageFontSize: string;
+    messageFontFamily: string;
+  };
+}
+
+function mergeParentTheme(parentTheme: Theme): Theme {
+  return merge(
+    {
+      bubbles: {
+        mineBackground: "blue",
+        mineColor: "#fff",
+        theirBackground: "#ccc",
+        theirColor: "#90909",
+        messageFontSize: "14px",
+        messageFontFamily: "system-ui"
+      }
+    },
+    parentTheme
+  );
+}
 
 const ChatPanel = styled.div`
   display: flex;
@@ -106,11 +134,13 @@ export default function ChatFeed({
   }
 
   return (
-    <ChatPanel>
-      <ChatHistory ref={chat} maxHeight={maxHeight}>
-        <div>{messageNodes}</div>
-      </ChatHistory>
-      {inputField}
-    </ChatPanel>
+    <ThemeProvider theme={mergeParentTheme}>
+      <ChatPanel>
+        <ChatHistory ref={chat} maxHeight={maxHeight}>
+          <div>{messageNodes}</div>
+        </ChatHistory>
+        {inputField}
+      </ChatPanel>
+    </ThemeProvider>
   );
 }
