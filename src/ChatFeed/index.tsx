@@ -42,10 +42,10 @@ const ChatPanel = styled.div`
   flex-direction: column;
   flex: 1;
   overflow: hidden;
-  padding: 10px;
 `;
 
 const ChatHistory = styled.div<{ maxHeight?: number }>`
+  padding: 0 10px;
   overflow: auto;
   height: ${props =>
     props.maxHeight != null ? props.maxHeight + "px" : "auto"};
