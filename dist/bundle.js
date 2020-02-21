@@ -233,7 +233,7 @@ function mergeParentTheme(parentTheme) {
         }
     }, parentTheme);
 }
-var ChatPanel = styled.div(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n  display: flex;\n  flex-direction: column;\n  flex: 1;\n  overflow: hidden;\n"], ["\n  display: flex;\n  flex-direction: column;\n  flex: 1;\n  overflow: hidden;\n"])));
+var ChatPanel = styled.div(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n  display: flex;\n  flex-direction: column;\n  flex: 1;\n  overflow: hidden;\n  padding: 10px;\n"], ["\n  display: flex;\n  flex-direction: column;\n  flex: 1;\n  overflow: hidden;\n  padding: 10px;\n"])));
 var ChatHistory = styled.div(templateObject_2$2 || (templateObject_2$2 = __makeTemplateObject(["\n  overflow: auto;\n  height: ", ";\n  max-height: ", ";\n"], ["\n  overflow: auto;\n  height: ",
     ";\n  max-height: ",
     ";\n"])), function (props) {
