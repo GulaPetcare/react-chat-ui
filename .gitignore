@@ -1,4 +1,5 @@
 node_modules
 lib
 temp
+demo
 .DS_Store

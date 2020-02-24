@@ -40,7 +40,7 @@ function ChatBubble(props) {
 var templateObject_1, templateObject_2, templateObject_3;
 
 var BubbleGroupContainer = styled.div(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n  margin: 10px 0;\n  overflow: auto;\n  position: relative;\n"], ["\n  margin: 10px 0;\n  overflow: auto;\n  position: relative;\n"])));
-var BubbleGroupHeader = styled.h5(templateObject_2$1 || (templateObject_2$1 = __makeTemplateObject(["\n  margin: 0;\n  font-size: 14px;\n  font-weight: bold;\n  color: #999;\n"], ["\n  margin: 0;\n  font-size: 14px;\n  font-weight: bold;\n  color: #999;\n"])));
+var BubbleGroupHeader = styled.h5(templateObject_2$1 || (templateObject_2$1 = __makeTemplateObject(["\n  margin: 0;\n  font-size: 14px;\n  font-weight: bold;\n  color: #999;\n  font-family: ", ";\n"], ["\n  margin: 0;\n  font-size: 14px;\n  font-weight: bold;\n  color: #999;\n  font-family: ", ";\n"])), function (props) { return props.theme.fontFamily; });
 function BubbleGroup(props) {
     var showSenderName = props.showSenderName, chatBubble = props.chatBubble, senderName = props.senderName, messages = props.messages;
     var ChatBubble$1 = chatBubble || ChatBubble;
@@ -230,7 +230,8 @@ function mergeParentTheme(parentTheme) {
             theirColor: "#90909",
             messageFontSize: "14px",
             messageFontFamily: "system-ui"
-        }
+        },
+        fontFamily: "system-ui"
     }, parentTheme);
 }
 var ChatPanel = styled.div(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n  display: flex;\n  flex-direction: column;\n  flex: 1;\n  overflow: hidden;\n"], ["\n  display: flex;\n  flex-direction: column;\n  flex: 1;\n  overflow: hidden;\n"])));

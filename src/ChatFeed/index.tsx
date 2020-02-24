@@ -19,6 +19,7 @@ interface Theme {
     messageFontSize: string;
     messageFontFamily: string;
   };
+  fontFamily: string;
 }
 
 function mergeParentTheme(parentTheme: Theme): Theme {
@@ -31,7 +32,8 @@ function mergeParentTheme(parentTheme: Theme): Theme {
         theirColor: "#90909",
         messageFontSize: "14px",
         messageFontFamily: "system-ui"
-      }
+      },
+      fontFamily: "system-ui"
     },
     parentTheme
   );
