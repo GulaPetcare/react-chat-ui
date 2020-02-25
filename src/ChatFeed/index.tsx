@@ -35,7 +35,7 @@ function mergeParentTheme(parentTheme: Theme): Theme {
       },
       fontFamily: "system-ui"
     },
-    parentTheme
+    parentTheme || {}
   );
 }
 

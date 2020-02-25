@@ -1,8 +1,8 @@
-import ChatBubble, { ChatBubbleProps } from "./ChatBubble/";
+import ChatBubble, { ChatBubbleProps } from "./ChatBubble";
 import BubbleGroup from "./BubbleGroup";
-import ChatFeed from "./ChatFeed/";
-import ChatInput from "./ChatInput/";
-import Message from "./Message/";
+import ChatFeed from "./ChatFeed";
+import ChatInput from "./ChatInput";
+import Message from "./Message";
 
 export {
   ChatBubble,

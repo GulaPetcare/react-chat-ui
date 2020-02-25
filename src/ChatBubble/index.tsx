@@ -35,8 +35,10 @@ export interface ChatBubbleProps {
 export default function ChatBubble(props: ChatBubbleProps) {
   return (
     <ChatBubbleWrapper>
-      <ChatBubbleUI me={props.message.fromMe}>
-        <MessageUI me={props.message.fromMe}>{props.message.message}</MessageUI>
+      <ChatBubbleUI data-test-id="rcu-bubble" me={props.message.fromMe}>
+        <MessageUI me={props.message.fromMe} data-test-id="rcu-bubble-text">
+          {props.message.message}
+        </MessageUI>
       </ChatBubbleUI>
     </ChatBubbleWrapper>
   );
