@@ -34,8 +34,8 @@ var MessageUI = styled.p(templateObject_3 || (templateObject_3 = __makeTemplateO
 }, function (props) { return props.theme.bubbles.messageFontSize; }, function (props) { return props.theme.bubbles.messageFontFamily; });
 function ChatBubble(props) {
     return (createElement(ChatBubbleWrapper, null,
-        createElement(ChatBubbleUI, { me: props.message.fromMe },
-            createElement(MessageUI, { me: props.message.fromMe }, props.message.message))));
+        createElement(ChatBubbleUI, { "data-test-id": "rcu-bubble", me: props.message.fromMe },
+            createElement(MessageUI, { me: props.message.fromMe, "data-test-id": "rcu-bubble-text" }, props.message.message))));
 }
 var templateObject_1, templateObject_2, templateObject_3;
 
@@ -232,7 +232,7 @@ function mergeParentTheme(parentTheme) {
             messageFontFamily: "system-ui"
         },
         fontFamily: "system-ui"
-    }, parentTheme);
+    }, parentTheme || {});
 }
 var ChatPanel = styled.div(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n  display: flex;\n  flex-direction: column;\n  flex: 1;\n  overflow: hidden;\n"], ["\n  display: flex;\n  flex-direction: column;\n  flex: 1;\n  overflow: hidden;\n"])));
 var ChatHistory = styled.div(templateObject_2$2 || (templateObject_2$2 = __makeTemplateObject(["\n  padding: 0 10px;\n  overflow: auto;\n  height: ", ";\n  max-height: ", ";\n"], ["\n  padding: 0 10px;\n  overflow: auto;\n  height: ",
