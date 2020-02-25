@@ -16,8 +16,12 @@ export default {
     replace({
       "process.env.NODE_ENV": JSON.stringify("dev")
     }),
-    livereload("demo"),
-    serve("demo"),
+    livereload({ watch: "demo", port: 3002 }),
+    serve({
+      contentBase: "demo",
+      open: true,
+      port: 3003
+    }),
     svgr({
       icon: true
     }),
