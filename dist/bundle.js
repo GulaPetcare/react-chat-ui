@@ -45,7 +45,7 @@ function BubbleGroup(props) {
     var showSenderName = props.showSenderName, chatBubble = props.chatBubble, senderName = props.senderName, messages = props.messages;
     var ChatBubble$1 = chatBubble || ChatBubble;
     var sampleMessage = messages[0];
-    return (createElement(BubbleGroupContainer, null,
+    return (createElement(BubbleGroupContainer, { "data-test-id": "rcu-bubble-group" },
         showSenderName &&
             (senderName || sampleMessage.senderName) !== "" &&
             sampleMessage.fromMe === false && (createElement(BubbleGroupHeader, null, senderName || sampleMessage.senderName)),

@@ -23,7 +23,7 @@ export default function BubbleGroup(props: BubbleGroupInterface) {
   const sampleMessage = messages[0];
 
   return (
-    <BubbleGroupContainer>
+    <BubbleGroupContainer data-test-id="rcu-bubble-group">
       {showSenderName &&
         (senderName || sampleMessage.senderName) !== "" &&
         sampleMessage.fromMe === false && (
