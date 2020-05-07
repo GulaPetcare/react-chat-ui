@@ -23,19 +23,19 @@ const styles = {
     paddingTop: 8,
     paddingBottom: 8,
     paddingLeft: 16,
-    paddingRight: 16
+    paddingRight: 16,
   } as React.CSSProperties,
   selected: {
     color: "#fff",
     backgroundColor: "#0084FF",
-    borderColor: "#0084FF"
-  } as React.CSSProperties
+    borderColor: "#0084FF",
+  } as React.CSSProperties,
 };
 
 const users = {
   you: "You",
   mark: "Mark",
-  evan: "Evan"
+  evan: "Evan",
 };
 
 const customBubble = (props: any) => (
@@ -63,17 +63,17 @@ class Chat extends React.Component<{}, State> {
           fromMe: false,
           senderId: "mark",
           message: "Hey guys!",
-          senderName: "Mark"
+          senderName: "Mark",
         }),
         new Message({
           fromMe: false,
           senderId: "evan",
           message: "Hey! Evan here. react-chat-ui is pretty dooope.",
-          senderName: "Evan"
-        })
+          senderName: "Evan",
+        }),
       ],
       useCustomBubble: false,
-      curr_user: "you"
+      curr_user: "you",
     };
   }
 
@@ -98,11 +98,11 @@ class Chat extends React.Component<{}, State> {
       fromMe: this.state.curr_user === "you",
       senderId: recipient,
       message,
-      senderName: users[recipient] as string
+      senderName: users[recipient] as string,
     });
 
     this.setState({
-      messages: prevState.messages.concat(newMessage)
+      messages: prevState.messages.concat(newMessage),
     });
   }
 
@@ -130,7 +130,7 @@ class Chat extends React.Component<{}, State> {
             showSenderName
           />
 
-          <form onSubmit={e => this.onMessageSubmit(e)}>
+          <form onSubmit={(e) => this.onMessageSubmit(e)}>
             <input
               ref={this.message}
               placeholder="Type a message..."
@@ -142,7 +142,7 @@ class Chat extends React.Component<{}, State> {
             <button
               style={{
                 ...styles.button,
-                ...(this.state.curr_user === "you" ? styles.selected : {})
+                ...(this.state.curr_user === "you" ? styles.selected : {}),
               }}
               onClick={() => this.onPress("you")}
             >
@@ -151,7 +151,7 @@ class Chat extends React.Component<{}, State> {
             <button
               style={{
                 ...styles.button,
-                ...(this.state.curr_user === "mark" ? styles.selected : {})
+                ...(this.state.curr_user === "mark" ? styles.selected : {}),
               }}
               onClick={() => this.onPress("mark")}
             >
@@ -160,7 +160,7 @@ class Chat extends React.Component<{}, State> {
             <button
               style={{
                 ...styles.button,
-                ...(this.state.curr_user === "evan" ? styles.selected : {})
+                ...(this.state.curr_user === "evan" ? styles.selected : {}),
               }}
               onClick={() => this.onPress("evan")}
             >
@@ -171,17 +171,17 @@ class Chat extends React.Component<{}, State> {
             style={{
               display: "flex",
               justifyContent: "center",
-              marginTop: 10
+              marginTop: 10,
             }}
           >
             <button
               style={{
                 ...styles.button,
-                ...(this.state.useCustomBubble ? styles.selected : {})
+                ...(this.state.useCustomBubble ? styles.selected : {}),
               }}
               onClick={() =>
                 this.setState({
-                  useCustomBubble: !this.state.useCustomBubble
+                  useCustomBubble: !this.state.useCustomBubble,
                 })
               }
             >
@@ -192,7 +192,7 @@ class Chat extends React.Component<{}, State> {
         <h2 className="text-center">There are Bubbles!</h2>
         <ThemeProvider
           theme={{
-            bubbles: { mineBackground: "red", theirBackground: "blue" }
+            bubbles: { mineBackground: "red", theirBackground: "blue" },
           }}
         >
           <ChatBubble
@@ -200,7 +200,7 @@ class Chat extends React.Component<{}, State> {
               new Message({
                 senderId: "mark",
                 message: "I float to the left!",
-                fromMe: false
+                fromMe: false,
               })
             }
           />
@@ -209,7 +209,7 @@ class Chat extends React.Component<{}, State> {
               new Message({
                 senderId: "evan",
                 message: "I float to the right!",
-                fromMe: true
+                fromMe: true,
               })
             }
           />
@@ -221,14 +221,14 @@ class Chat extends React.Component<{}, State> {
               new Message({
                 fromMe: false,
                 senderId: "1",
-                message: "I forgot to mention..."
+                message: "I forgot to mention...",
               }),
               new Message({
                 fromMe: false,
                 senderId: "1",
                 message:
-                  "Oh no, I forgot... I think I was going to say I'm a BubbleGroup"
-              })
+                  "Oh no, I forgot... I think I was going to say I'm a BubbleGroup",
+              }),
             ]}
             id={1}
             showSenderName={true}
@@ -239,7 +239,7 @@ class Chat extends React.Component<{}, State> {
               new Message({
                 fromMe: false,
                 senderId: "2",
-                message: "I 'm a single ChatBubble!"
+                message: "I 'm a single ChatBubble!",
               })
             }
           />
@@ -248,13 +248,13 @@ class Chat extends React.Component<{}, State> {
               new Message({
                 fromMe: true,
                 senderId: "0",
-                message: "How could you forget already?!"
+                message: "How could you forget already?!",
               }),
               new Message({
                 fromMe: true,
                 senderId: "0",
-                message: "Oh well. I'm a BubbleGroup as well"
-              })
+                message: "Oh well. I'm a BubbleGroup as well",
+              }),
             ]}
             id={1}
             showSenderName={true}

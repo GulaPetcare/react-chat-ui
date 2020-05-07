@@ -31,9 +31,9 @@ function mergeParentTheme(parentTheme: Theme): Theme {
         theirBackground: "#ccc",
         theirColor: "#90909",
         messageFontSize: "14px",
-        messageFontFamily: "system-ui"
+        messageFontFamily: "system-ui",
       },
-      fontFamily: "system-ui"
+      fontFamily: "system-ui",
     },
     parentTheme || {}
   );
@@ -49,9 +49,9 @@ const ChatPanel = styled.div`
 const ChatHistory = styled.div<{ maxHeight?: number }>`
   padding: 0 10px;
   overflow: auto;
-  height: ${props =>
+  height: ${(props) =>
     props.maxHeight != null ? props.maxHeight + "px" : "auto"};
-  max-height: ${props =>
+  max-height: ${(props) =>
     props.maxHeight != null ? props.maxHeight + "px" : "auto"};
 `;
 
@@ -78,7 +78,7 @@ export default function ChatFeed({
   isTyping,
   chatBubble,
   showSenderName,
-  hasInputField
+  hasInputField,
 }: ChatFeedInterface) {
   const chat = React.useRef<HTMLDivElement>(null);
 
@@ -128,7 +128,7 @@ export default function ChatFeed({
               fromMe: false,
               senderId: "1",
               message: "...",
-              senderName: ""
+              senderName: "",
             })
           }
         />

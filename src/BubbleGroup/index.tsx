@@ -14,7 +14,7 @@ const BubbleGroupHeader = styled.h5`
   font-size: 14px;
   font-weight: bold;
   color: #999;
-  font-family: ${props => props.theme.fontFamily};
+  font-family: ${(props) => props.theme.fontFamily};
 `;
 
 export default function BubbleGroup(props: BubbleGroupInterface) {
@@ -32,7 +32,7 @@ export default function BubbleGroup(props: BubbleGroupInterface) {
           </BubbleGroupHeader>
         )}
       {messages.map((message, i) => (
-        <ChatBubble key={i} message={message} />
+        <ChatBubble key={i} message={message} first={i === 0} />
       ))}
     </BubbleGroupContainer>
   );
