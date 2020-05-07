@@ -2,12 +2,15 @@ import * as React from "react";
 import styled from "styled-components";
 import Message from "../Message";
 
-const BubbleGroupHeader = styled.h5`
+const BubbleGroupHeader = styled.h5<{ me: boolean }>`
   margin: 0;
   margin-bottom: 4px;
   font-size: 14px;
   font-weight: 500;
-  color: #666;
+  color: ${(props) =>
+    props.me
+      ? props.theme.bubbles.mineHeader
+      : props.theme.bubbles.theirHeader};
   font-family: ${(props) => props.theme.fontFamily};
 `;
 
@@ -68,7 +71,9 @@ export default function ChatBubble(props: ChatBubbleProps) {
       >
         <MessageUI me={props.message.fromMe} data-test-id="rcu-bubble-text">
           {props.showSenderName && (
-            <BubbleGroupHeader>{props.senderName}</BubbleGroupHeader>
+            <BubbleGroupHeader me={props.message.fromMe}>
+              {props.senderName}
+            </BubbleGroupHeader>
           )}
           {props.message.message}
         </MessageUI>

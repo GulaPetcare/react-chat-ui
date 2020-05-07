@@ -192,7 +192,12 @@ class Chat extends React.Component<{}, State> {
         <h2 className="text-center">There are Bubbles!</h2>
         <ThemeProvider
           theme={{
-            bubbles: { mineBackground: "red", theirBackground: "blue" },
+            bubbles: {
+              mineBackground: "red",
+              mineHeader: "white",
+              theirBackground: "green",
+              theirHeader: "white",
+            },
           }}
         >
           <ChatBubble

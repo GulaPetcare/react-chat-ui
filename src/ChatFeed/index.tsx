@@ -14,8 +14,10 @@ interface Theme {
   bubbles: {
     mineBackground: string;
     mineColor: string;
+    mineHeader: string;
     theirColor: string;
     theirBackground: string;
+    theirHeader: string;
     messageFontSize: string;
     messageFontFamily: string;
   };
@@ -26,14 +28,16 @@ function mergeParentTheme(parentTheme: Theme): Theme {
   return merge(
     {
       bubbles: {
-        mineBackground: "blue",
-        mineColor: "#fff",
-        theirBackground: "#ccc",
-        theirColor: "#90909",
+        mineBackground: "#2D6AEF",
+        mineColor: "#ffffff",
+        mineHeader: "#ffffff",
+        theirBackground: "#f2f4f8",
+        theirColor: "#37393C",
+        theirHeader: "#71757a",
         messageFontSize: "14px",
-        messageFontFamily: "system-ui",
+        messageFontFamily: "Avenir, system-ui",
       },
-      fontFamily: "system-ui",
+      fontFamily: "Avenir, system-ui",
     },
     parentTheme || {}
   );
