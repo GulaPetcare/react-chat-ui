@@ -70,7 +70,7 @@ export default function ChatBubble(props: ChatBubbleProps) {
         first={props.first}
       >
         <MessageUI me={props.message.fromMe} data-test-id="rcu-bubble-text">
-          {props.showSenderName && (
+          {props.showSenderName && props.senderName !== "You" && (
             <BubbleGroupHeader me={props.message.fromMe}>
               {props.senderName}
             </BubbleGroupHeader>
