@@ -14,8 +14,10 @@ interface Theme {
   bubbles: {
     mineBackground: string;
     mineColor: string;
+    mineHeader: string;
     theirColor: string;
     theirBackground: string;
+    theirHeader: string;
     messageFontSize: string;
     messageFontFamily: string;
   };
@@ -26,14 +28,16 @@ function mergeParentTheme(parentTheme: Theme): Theme {
   return merge(
     {
       bubbles: {
-        mineBackground: "blue",
-        mineColor: "#fff",
-        theirBackground: "#ccc",
-        theirColor: "#90909",
+        mineBackground: "#2D6AEF",
+        mineColor: "#ffffff",
+        mineHeader: "#ffffff",
+        theirBackground: "#f2f4f8",
+        theirColor: "#37393C",
+        theirHeader: "#71757a",
         messageFontSize: "14px",
-        messageFontFamily: "system-ui"
+        messageFontFamily: "Avenir, system-ui",
       },
-      fontFamily: "system-ui"
+      fontFamily: "Avenir, system-ui",
     },
     parentTheme || {}
   );
@@ -49,9 +53,9 @@ const ChatPanel = styled.div`
 const ChatHistory = styled.div<{ maxHeight?: number }>`
   padding: 0 10px;
   overflow: auto;
-  height: ${props =>
+  height: ${(props) =>
     props.maxHeight != null ? props.maxHeight + "px" : "auto"};
-  max-height: ${props =>
+  max-height: ${(props) =>
     props.maxHeight != null ? props.maxHeight + "px" : "auto"};
 `;
 
@@ -78,7 +82,7 @@ export default function ChatFeed({
   isTyping,
   chatBubble,
   showSenderName,
-  hasInputField
+  hasInputField,
 }: ChatFeedInterface) {
   const chat = React.useRef<HTMLDivElement>(null);
 
@@ -128,7 +132,7 @@ export default function ChatFeed({
               fromMe: false,
               senderId: "1",
               message: "...",
-              senderName: ""
+              senderName: "",
             })
           }
         />
