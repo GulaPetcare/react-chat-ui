@@ -14,13 +14,13 @@ export default function BubbleGroup(props: BubbleGroupInterface) {
   const ChatBubble = chatBubble || DefaultChatBubble;
   const sampleMessage = messages[0];
 
-  const senderNameHandler = () => {
-    if (senderName || sampleMessage.senderName !== "") {
-      return senderName || sampleMessage.senderName;
-    } else {
-      return "";
-    }
-  };
+  let senderNameToRender = "";
+  if (sampleMessage.senderName) {
+    senderNameToRender = sampleMessage.senderName;
+  }
+  if (senderName) {
+    senderNameToRender = senderName;
+  }
 
   return (
     <BubbleGroupContainer data-test-id="rcu-bubble-group">
@@ -29,17 +29,10 @@ export default function BubbleGroup(props: BubbleGroupInterface) {
           key={i}
           message={message}
           first={i === 0}
-          senderName={senderNameHandler()}
-          showSenderName={i === 0 ? true : false}
+          senderName={senderNameToRender}
+          showSenderName={i === 0}
         />
       ))}
-      {/* {showSenderName &&
-        (senderName || sampleMessage.senderName) !== "" &&
-        sampleMessage.fromMe === false && (
-          <BubbleGroupHeader>
-            {senderName || sampleMessage.senderName}
-          </BubbleGroupHeader>
-        )} */}
     </BubbleGroupContainer>
   );
 }
