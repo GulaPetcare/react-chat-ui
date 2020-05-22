@@ -9,5 +9,5 @@ interface ChatFeedInterface {
     showSenderName?: boolean;
     chatBubble?: typeof DefaultChatBubble;
 }
-export default function ChatFeed({ messages, maxHeight, isTyping, chatBubble, showSenderName, hasInputField }: ChatFeedInterface): JSX.Element;
+export default function ChatFeed({ messages, maxHeight, isTyping, chatBubble, showSenderName, hasInputField, }: ChatFeedInterface): JSX.Element;
 export {};
