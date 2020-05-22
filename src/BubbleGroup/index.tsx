@@ -10,7 +10,7 @@ const BubbleGroupContainer = styled.div`
 `;
 
 export default function BubbleGroup(props: BubbleGroupInterface) {
-  const { chatBubble, senderName, messages } = props;
+  const { showSenderName, chatBubble, senderName, messages } = props;
   const ChatBubble = chatBubble || DefaultChatBubble;
   const sampleMessage = messages[0];
 
@@ -30,7 +30,12 @@ export default function BubbleGroup(props: BubbleGroupInterface) {
           message={message}
           first={i === 0}
           senderName={senderNameToRender}
-          showSenderName={i === 0}
+          showSenderName={
+            showSenderName &&
+            (senderName || sampleMessage.senderName) !== "" &&
+            sampleMessage.fromMe === false &&
+            i === 0
+          }
         />
       ))}
     </BubbleGroupContainer>
