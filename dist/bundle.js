@@ -62,7 +62,7 @@ var templateObject_1, templateObject_2, templateObject_3, templateObject_4;
 
 var BubbleGroupContainer = styled.div(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n  margin: 16px 0;\n  overflow: auto;\n  position: relative;\n"], ["\n  margin: 16px 0;\n  overflow: auto;\n  position: relative;\n"])));
 function BubbleGroup(props) {
-    var chatBubble = props.chatBubble, senderName = props.senderName, messages = props.messages;
+    var showSenderName = props.showSenderName, chatBubble = props.chatBubble, senderName = props.senderName, messages = props.messages;
     var ChatBubble$1 = chatBubble || ChatBubble;
     var sampleMessage = messages[0];
     var senderNameToRender = "";
@@ -72,7 +72,10 @@ function BubbleGroup(props) {
     if (senderName) {
         senderNameToRender = senderName;
     }
-    return (createElement(BubbleGroupContainer, { "data-test-id": "rcu-bubble-group" }, messages.map(function (message, i) { return (createElement(ChatBubble$1, { key: i, message: message, first: i === 0, senderName: senderNameToRender, showSenderName: i === 0 })); })));
+    return (createElement(BubbleGroupContainer, { "data-test-id": "rcu-bubble-group" }, messages.map(function (message, i) { return (createElement(ChatBubble$1, { key: i, message: message, first: i === 0, senderName: senderNameToRender, showSenderName: showSenderName &&
+            (senderName || sampleMessage.senderName) !== "" &&
+            sampleMessage.fromMe === false &&
+            i === 0 })); })));
 }
 var templateObject_1$1;
 
