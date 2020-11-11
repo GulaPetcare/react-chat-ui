@@ -54,6 +54,9 @@ const MessageUI = styled.p<{ me: boolean }>`
   font-family: ${(props) => props.theme.bubbles.messageFontFamily};
   font-weight: normal;
   margin: 0;
+  a {
+    color: ${(props) => props.me ? props.theme.bubbles.mineColor : props.theme.bubbles.theirColor}
+  }
 `;
 
 export interface ChatBubbleProps {

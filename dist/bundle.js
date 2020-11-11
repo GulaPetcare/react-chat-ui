@@ -1657,10 +1657,10 @@ var ChatBubbleUI = styled.div(templateObject_3 || (templateObject_3 = __makeTemp
         ? props.theme.bubbles.mineBackground
         : props.theme.bubbles.theirBackground;
 }, function (props) { return handleBorderRadius(props.me, props.first); }, function (props) { return (props.me ? "right" : "left"); });
-var MessageUI = styled.p(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  color: ", ";\n  font-size: ", ";\n  font-family: ", ";\n  font-weight: normal;\n  margin: 0;\n"], ["\n  color: ",
-    ";\n  font-size: ", ";\n  font-family: ", ";\n  font-weight: normal;\n  margin: 0;\n"])), function (props) {
+var MessageUI = styled.p(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  color: ", ";\n  font-size: ", ";\n  font-family: ", ";\n  font-weight: normal;\n  margin: 0;\n  a {\n    color: ", "\n  }\n"], ["\n  color: ",
+    ";\n  font-size: ", ";\n  font-family: ", ";\n  font-weight: normal;\n  margin: 0;\n  a {\n    color: ", "\n  }\n"])), function (props) {
     return props.me ? props.theme.bubbles.mineColor : props.theme.bubbles.theirColor;
-}, function (props) { return props.theme.bubbles.messageFontSize; }, function (props) { return props.theme.bubbles.messageFontFamily; });
+}, function (props) { return props.theme.bubbles.messageFontSize; }, function (props) { return props.theme.bubbles.messageFontFamily; }, function (props) { return props.me ? props.theme.bubbles.mineColor : props.theme.bubbles.theirColor; });
 function ChatBubble(props) {
     var isFirstMessage = props.first != null ? props.first : true;
     return (createElement(ChatBubbleWrapper, { me: props.message.fromMe },
