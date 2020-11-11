@@ -1,6 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import Message from "../Message";
+import Linkify from "linkifyjs/react";
 
 const BubbleGroupHeader = styled.h5<{ me: boolean }>`
   margin: 0;
@@ -77,9 +78,11 @@ export default function ChatBubble(props: ChatBubbleProps) {
             {props.senderName}
           </BubbleGroupHeader>
         )}
-        <MessageUI me={props.message.fromMe} data-test-id="rcu-bubble-text">
-          {props.message.message}
-        </MessageUI>
+        <Linkify>
+          <MessageUI me={props.message.fromMe} data-test-id="rcu-bubble-text">
+            {props.message.message}
+          </MessageUI>
+        </Linkify>
       </ChatBubbleUI>
     </ChatBubbleWrapper>
   );
