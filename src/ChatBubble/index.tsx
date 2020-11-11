@@ -55,7 +55,8 @@ const MessageUI = styled.p<{ me: boolean }>`
   font-weight: normal;
   margin: 0;
   a {
-    color: ${(props) => props.me ? props.theme.bubbles.mineColor : props.theme.bubbles.theirColor}
+    color: ${(props) =>
+      props.me ? props.theme.bubbles.mineColor : "#0000EE"};
   }
 `;
 
