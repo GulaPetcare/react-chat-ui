@@ -35,8 +35,8 @@
     "rollup-plugin-peer-deps-external": "^2.2.2",
     "rollup-plugin-serve": "^1.0.1",
     "rollup-plugin-typescript2": "^0.26.0",
-    "typescript": "^3.7.5",
-    "styled-components": "^5.0.1"
+    "styled-components": "^5.0.1",
+    "typescript": "^3.7.5"
   },
   "dependencies": {
     "deepmerge": "^4.2.2",
